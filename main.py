@@ -11,7 +11,14 @@ while True:
     choice = input("Enter the number corresponding to the action (1-4): \n")
 
     if choice == "4":
-        break
+        print("Are you sure you want to exit? ")
+        answer = input("Select Yes or No ( Y or N ): ").lower()
+        if answer == "y":
+            break
+        elif answer == "n":
+            continue
+        else:
+            print("Invalid answer, please try again!")
     elif choice == "1":
         pass
     elif choice == "2":
