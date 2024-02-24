@@ -8,11 +8,11 @@ def add_task():
         print("Task added successfully!")
 
     while True:
-        answer_to_add_more = input("Do you want more tasks? (Y or N): ").upper()
+        answer_to_add_more = input("Do you want more tasks? (Y or N): ").lower()
 
-        if answer_to_add_more == "N":
+        if answer_to_add_more == "n":
             break
-        elif answer_to_add_more == "Y":
+        elif answer_to_add_more == "y":
             add_task()
         else:
             print("Invalid answer, please enter 'Y' or 'N'!")
@@ -28,7 +28,21 @@ def show_tasks():
     time.sleep(1)
     print()
 
-    
+
+def delete_task():
+    show_tasks()
+    number_of_task_to_remove = int(input("Which task do you want to remove, enter the number of the task: ")) - 1
+
+    orig_lines = [line.strip() for line in open('list_of_to_do.txt').readlines()]
+    new_lines = [line for line in orig_lines if orig_lines.index(line) != number_of_task_to_remove]
+
+    with open('list_of_to_do.txt', 'w') as fp:
+        print(*new_lines, sep='\n', file=fp)
+
+    print("This is your new To Do List!")
+    show_tasks()
+
+
 print("--- Welcome to my console To Do List! ---")
 
 while True:
@@ -51,11 +65,9 @@ while True:
     elif choice == "1":
         add_task()
     elif choice == "2":
-        pass
+        delete_task()
     elif choice == "3":
         show_tasks()
     else:
         print("Invalid number! Please enter number between 1 and 4.\n")
         time.sleep(2)
-
-
